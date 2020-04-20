@@ -55,7 +55,7 @@ namespace GrpcJsonTranscoder
                     logger.LogInformation($"Request object data is {requestJsonData}");
 
                     var loadBalancerFactory = context.HttpContext.RequestServices.GetService<ILoadBalancerFactory>();
-                    var loadBalancerResponse = await loadBalancerFactory.Get(context.DownstreamReRoute, context.Configuration.ServiceProviderConfiguration);
+                    var loadBalancerResponse = loadBalancerFactory.Get(context.DownstreamReRoute, context.Configuration.ServiceProviderConfiguration);
                     var serviceHostPort = await loadBalancerResponse.Data.Lease(context);
 
                     var downstreamHost = $"{serviceHostPort.Data.DownstreamHost}:{serviceHostPort.Data.DownstreamPort}";
